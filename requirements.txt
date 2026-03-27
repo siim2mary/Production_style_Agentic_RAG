@@ -1,0 +1,36 @@
+# Web Framework
+fastapi
+uvicorn
+python-multipart
+pydantic
+
+# LangChain Core & Graph
+langchain
+langchain-core
+langchain-community
+langgraph
+
+# AI Models & Embeddings
+langchain-huggingface
+huggingface_hub
+sentence-transformers
+
+# Vector Database
+faiss-cpu
+
+# Tools & Drivers
+duckduckgo-search
+pypdf
+
+# Environment Management
+python-dotenv
+
+# --- PRODUCTION ADDITIONS ---
+# Required for LangChain's internal data handling
+pydantic-settings
+# Required for FAISS and numerical operations in Linux/Docker
+numpy
+# Required for PDF processing logic
+pypdf
+# Standard library for advanced HTTP requests (sometimes needed by tools)
+requests

@@ -1,0 +1,33 @@
+# === Python Environment ===
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+env/
+venv/
+ENV/
+
+# === Elite Free Agentic RAG Specifics ===
+# Ignore the local vector database folder (it can be large)
+faiss_index/
+db_faiss/
+
+# Ignore the temporary upload directory
+temp_pdfs/
+uploads/
+
+# === Logs & SQLite ===
+*.log
+*.sqlite
+*.db
+
+# === Configuration & Secrets ===
+# Crucial: Never upload your HF_TOKEN or actual config values
+config.py.bak
+instance/
+.pytest_cache/
+
+# === OS Specific ===
+.DS_Store
+Thumbs.db
