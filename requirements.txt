@@ -29,6 +29,7 @@ faiss-cpu
 
 # Tools & Drivers
 duckduckgo-search
+tavily-python
 pypdf
 
 # Environment Management

@@ -23,6 +23,7 @@ from langchain_huggingface import HuggingFaceEmbeddings, HuggingFaceEndpoint, Ch
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_community.vectorstores import FAISS
 from langchain_community.tools import DuckDuckGoSearchRun
+from langchain_community.tools.tavily_search import TavilySearchResults
 from langgraph.graph import StateGraph, END
 
 # ==========================================
@@ -88,8 +89,15 @@ def web_search_node(state: AgentState):
     try:
         # We explicitly search for 2026 to help the LLM bypass its training cutoff
         search_query = f"{state['question']} current price March 2026"
-        res = search_tool.run(search_query)
-        return {"context": [f"REAL-TIME WEB DATA (2026): {res}"], "sources": ["DuckDuckGo"], "next_step": "generate"}
+        if config.TAVILY_API_KEY:
+            tavily_tool = TavilySearchResults(max_results=5)
+            results = tavily_tool.invoke(search_query)
+            res = "\n".join(r.get("content", "") for r in results if isinstance(r, dict))
+            source_name = "Tavily"
+        else:
+            res = search_tool.run(search_query)
+            source_name = "DuckDuckGo"
+        return {"context": [f"REAL-TIME WEB DATA (2026): {res}"], "sources": [source_name], "next_step": "generate"}
     except:
         return {"context": ["Search currently unavailable."], "sources": [], "next_step": "generate"}
 
